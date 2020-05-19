@@ -1,0 +1,41 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+server:
+  port: 8800
+mybatis:
+  mapper-locations: "classpath*:/mappers/**/**Mapper.xml"
+management:
+  endpoint:
+    health:
+      show-details: always
+---
+spring:
+  profiles: dev
+  datasource:
+    url: jdbc:mysql://192.168.0.20:3306/wly?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: tourage123
+    hikari:
+      maximum-pool-size: 5
+      minimum-idle: 5
+
+logging:
+  level:
+    root: info
+    com.tourage: debug
+
+---
+spring:
+  profiles: production
+  datasource:
+    url: jdbc:mysql://bx-e1-bigd.mysql.rds.aliyuncs.com:3306/hebei?zeroDateTimeBehavior=convertToNull&useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false&serverTimezone=Asia/Shanghai
+    username: bigd
+    password: fa384FAJiqu710OI1lxN
+    hikari:
+      maximum-pool-size: 5
+      minimum-idle: 5
+logging:
+  level:
+    root: info
+    com.tourage: info
