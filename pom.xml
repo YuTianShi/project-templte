@@ -9,11 +9,11 @@
         <version>2.2.2.RELEASE</version>
     </parent>
 
-    <groupId>com.tourage</groupId>
-    <artifactId>project-templte</artifactId>
+    <groupId>com.shitianyu.validate</groupId>
+    <artifactId>validate-demo</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>project-templte</name>
-    <description>项目模板</description>
+    <name>validate-demo</name>
+    <description>Demo project for Spring Boot</description>
 
     <properties>
         <hutool.version>5.0.6</hutool.version>
@@ -102,16 +102,6 @@
         </dependency>
     </dependencies>
     <repositories>
-        <repository>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-            <id>nexus</id>
-            <url>https://nexus.cydata.55if.com/repository/maven-public/</url>
-        </repository>
         <repository>
             <releases>
                 <enabled>true</enabled>
