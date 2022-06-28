@@ -17,18 +17,18 @@ public class Test {
     //保存 post
     private static String lockUrl = "/outpatient/register/order/lock";
 
-    private static String lockParam = "{\"deptId\":\"28\",\"doctorId\":\"1-2063\",\"scheduleId\":\"\",\"scheduleDate\":\"2021-10-27\"," +
-            "\"visitPeriod\":\"afternoon\",\"visitBeginTime\":\"\",\"visitEndTime\":\"\",\"patientId\":\"1986696\",\"smsId\":\"%s\"," +
-            "\"mobileCode\":\"%d\",\"visitQueue\":\"870559\",\"mblNo\":\"18772772693\",\"subHisId\":\"18701\",\"districtId\":\"1001\"," +
-            "\"branchId\":\"00\",\"intervalCode\":\"9\"}";
+    private static String lockParam = "{\"deptId\":\"28\",\"doctorId\":\"1-839\",\"scheduleId\":\"\",\"scheduleDate\":\"2022-07-12\"," +
+            "\"visitPeriod\":\"morning\",\"visitBeginTime\":\"\",\"visitEndTime\":\"\",\"patientId\":\"1995058\",\"smsId\":\"%s\"," +
+            "\"mobileCode\":\"%d\",\"visitQueue\":\"871700\",\"mblNo\":\"18772772693\",\"subHisId\":\"18701\",\"districtId\":\"1001\"," +
+            "\"branchId\":\"00\",\"intervalCode\":\"8\"}";
 
 
     public static void main(String[] args) {
-        String format = String.format(lockParam, "b3485b76712d43c7a60a4c206d247ef9", 515797);
+        String format = String.format(lockParam, "b042bbd28ccb46e59f7d011ef81efe27", 435373);
         HttpResponse execute = HttpUtil.createPost(host + lockUrl)
                 .body(format)
-                .header("token", "c22e5ac6362342a4b8f880bd9d840b55")
-                .header("Cookie", "COOKIE_JSESSIONID_187_1=1634745705316-FC442CBC21A842E8A6E4F2").execute();
+                .header("token", "c4df69bc21a446ea943b33d2170b3c13")
+                .header("Cookie", "COOKIE_JSESSIONID_187_1=1634831982590-C140EF9D8B724758C600B9").execute();
         String body = execute.body();
         log.info(body);
     }
