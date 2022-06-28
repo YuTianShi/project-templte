@@ -11,14 +11,47 @@ management:
       show-details: always
 ---
 spring:
-  profiles: dev
+  profiles:
+    active: dev
   datasource:
-    url: jdbc:mysql://192.168.0.20:3306/wly?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://42.192.1.184:3306/test?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai
     username: root
-    password: tourage123
+    password: mysql
     hikari:
       maximum-pool-size: 5
       minimum-idle: 5
+  kafka:
+      bootstrap-servers: 42.192.1.184:9092
+      producer: # 生产者
+        retries: 3 # 设置大于0的值，则客户端会将发送失败的记录重新发送
+        batch-size: 16384
+        buffer-memory: 33554432
+        acks: 1
+        # 指定消息key和消息体的编解码方式
+        key-serializer: org.apache.kafka.common.serialization.StringSerializer
+        value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      consumer:
+        group-id: default-group
+        enable-auto-commit: false
+        auto-offset-reset: earliest
+        key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+        value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      listener:
+        # 当每一条记录被消费者监听器（ListenerConsumer）处理之后提交
+        # RECORD
+        # 当每一批poll()的数据被消费者监听器（ListenerConsumer）处理之后提交
+        # BATCH
+        # 当每一批poll()的数据被消费者监听器（ListenerConsumer）处理之后，距离上次提交时间大于TIME时提交
+        # TIME
+        # 当每一批poll()的数据被消费者监听器（ListenerConsumer）处理之后，被处理record数量大于等于COUNT时提交
+        # COUNT
+        # TIME |　COUNT　有一个条件满足时提交
+        # COUNT_TIME
+        # 当每一批poll()的数据被消费者监听器（ListenerConsumer）处理之后, 手动调用Acknowledgment.acknowledge()后提交
+        # MANUAL
+        # 手动调用Acknowledgment.acknowledge()后立即提交，一般使用这种
+        # MANUAL_IMMEDIATE
+        ack-mode: manual_immediate
 
 logging:
   level:
@@ -29,9 +62,9 @@ logging:
 spring:
   profiles: production
   datasource:
-    url: jdbc:mysql://bx-e1-bigd.mysql.rds.aliyuncs.com:3306/hebei?zeroDateTimeBehavior=convertToNull&useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false&serverTimezone=Asia/Shanghai
-    username: bigd
-    password: fa384FAJiqu710OI1lxN
+    url: jdbc:mysql://42.192.1.184:3306/test?zeroDateTimeBehavior=convertToNull&useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: mysql
     hikari:
       maximum-pool-size: 5
       minimum-idle: 5
