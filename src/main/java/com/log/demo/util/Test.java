@@ -17,14 +17,14 @@ public class Test {
     //保存 post
     private static String lockUrl = "/outpatient/register/order/lock";
 
-    private static String lockParam = "{\"deptId\":\"28\",\"doctorId\":\"1-839\",\"scheduleId\":\"\",\"scheduleDate\":\"2022-07-12\"," +
-            "\"visitPeriod\":\"morning\",\"visitBeginTime\":\"\",\"visitEndTime\":\"\",\"patientId\":\"1995058\",\"smsId\":\"%s\"," +
-            "\"mobileCode\":\"%d\",\"visitQueue\":\"871700\",\"mblNo\":\"18772772693\",\"subHisId\":\"18701\",\"districtId\":\"1001\"," +
-            "\"branchId\":\"00\",\"intervalCode\":\"8\"}";
+    private static String lockParam = "{\"deptId\":\"28\",\"doctorId\":\"1-839\",\"scheduleId\":\"\",\"scheduleDate\":\"2022-07-12\",\n" +
+            "        \"visitPeriod\":\"afternoon\",\"visitBeginTime\":\"\",\"visitEndTime\":\"\",\"patientId\":\"1995058\",\"smsId\":\"%s\",\n" +
+            "        \"mobileCode\":\"%d\",\"visitQueue\":\"1070978\",\"mblNo\":\"18772772693\",\n" +
+            "        \"subHisId\":\"18701\",\"districtId\":\"1001\",\"branchId\":\"00\",\"intervalCode\":\"5\",\"parentDeptId\":\"\",\"rid\":\"232\"}";
 
 
     public static void main(String[] args) {
-        String format = String.format(lockParam, "b042bbd28ccb46e59f7d011ef81efe27", 435373);
+        String format = String.format(lockParam, "1c49baf8677c400a8642d4c5d2d9d424", 738084);
         HttpResponse execute = HttpUtil.createPost(host + lockUrl)
                 .body(format)
                 .header("token", "c4df69bc21a446ea943b33d2170b3c13")

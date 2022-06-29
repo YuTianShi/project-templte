@@ -56,6 +56,7 @@ public class LogRecordContext {
      }token: 4b7531564fa64af18bdc5b45f660c6e5
      **/
     public static void main(String[] args) {
+        //String smsId = sms();
         for (;;) {
             String smsId = sms();
             if (smsId != null) {
@@ -101,7 +102,7 @@ public class LogRecordContext {
             JSONObject parse1 = JSONUtil.parseObj(body1);
             return parse1.getStr("data");
         } else {
-            return "";
+            return null;
         }
     }
 
