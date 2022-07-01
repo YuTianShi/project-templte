@@ -16,18 +16,23 @@ public class Test {
 
     //保存 post
     private static String lockUrl = "/outpatient/register/order/lock";
-
-    private static String lockParam = "{\"deptId\":\"28\",\"doctorId\":\"1-839\",\"scheduleId\":\"\",\"scheduleDate\":\"2022-07-12\",\n" +
-            "        \"visitPeriod\":\"afternoon\",\"visitBeginTime\":\"\",\"visitEndTime\":\"\",\"patientId\":\"1995058\",\"smsId\":\"%s\",\n" +
+    //visitQueue
+    private static String lockParam = "{\"deptId\":\"28\",\"doctorId\":\"1-839\",\"scheduleId\":\"\",\"scheduleDate\":\"2022-07-05\",\n" +
+            "        \"visitPeriod\":\"morning\",\"visitBeginTime\":\"\",\"visitEndTime\":\"\",\"patientId\":\"1995058\",\"smsId\":\"%s\",\n" +
             "        \"mobileCode\":\"%d\",\"visitQueue\":\"1070978\",\"mblNo\":\"18772772693\",\n" +
+            "        \"subHisId\":\"18701\",\"districtId\":\"1001\",\"branchId\":\"00\",\"intervalCode\":\"5\",\"parentDeptId\":\"\",\"rid\":\"232\"}";
+
+    private static String lockParam1 = "{\"deptId\":\"28\",\"doctorId\":\"1-2063\",\"scheduleId\":\"\",\"scheduleDate\":\"2022-07-13\",\n" +
+            "        \"visitPeriod\":\"morning\",\"visitBeginTime\":\"\",\"visitEndTime\":\"\",\"patientId\":\"1995058\",\"smsId\":\"%s\",\n" +
+            "        \"mobileCode\":\"%d\",\"visitQueue\":\"1072008\",\"mblNo\":\"18772772693\",\n" +
             "        \"subHisId\":\"18701\",\"districtId\":\"1001\",\"branchId\":\"00\",\"intervalCode\":\"5\",\"parentDeptId\":\"\",\"rid\":\"232\"}";
 
 
     public static void main(String[] args) {
-        String format = String.format(lockParam, "1c49baf8677c400a8642d4c5d2d9d424", 738084);
+        String format = String.format(lockParam, "e524f2cf7790494cbbea790ba262d9f7", 501206);
         HttpResponse execute = HttpUtil.createPost(host + lockUrl)
                 .body(format)
-                .header("token", "c4df69bc21a446ea943b33d2170b3c13")
+                .header("token", "0ac8c5215bb84e34815233a8c16d7ad3")
                 .header("Cookie", "COOKIE_JSESSIONID_187_1=1634831982590-C140EF9D8B724758C600B9").execute();
         String body = execute.body();
         log.info(body);

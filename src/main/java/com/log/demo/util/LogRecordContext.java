@@ -27,8 +27,11 @@ public class LogRecordContext {
     private static String url4 = "/outpatient/NucleiAcidForm";
 
     //短信
-    private static String smsUrl = "/outpatient/register/verify/before/sms?deptId=28&doctorId=1-839&patientId=1995058&scheduleDate=2022-07-12";
+    private static String smsUrl = "/outpatient/register/verify/before/sms?deptId=28&doctorId=1-839&patientId=1995058&scheduleDate=2022-07-07";
     private static String smsUrl1 = "/houseKeeperAuth/authentication/smsCode/18772772693?mobile=18772772693&subHisId=18701";
+
+    /*private static String smsUrl2 = "/outpatient/register/verify/before/sms?deptId=28&doctorId=1-2063&patientId=1995058&scheduleDate=2022-07-13";
+    private static String smsUrl3 = "/houseKeeperAuth/authentication/smsCode/18772772693?mobile=18772772693&subHisId=18701";*/
     private static String param1 = "{\"patientName\":\"任娇\",\"patientIdNo\":\"140602199505130028\",\"type\":\"register\",\"isFever\":\"1\",\"isDangerous\":\"1\",\"isNegative\":\"0\"}";
     private static String param2 = "{\"patientName\":\"施天宇\",\"patientIdNo\":\"421083199510012812\",\"type\":\"register\",\"isFever\":\"1\",\"isDangerous\":\"1\",\"isNegative\":\"0\"}";
 
@@ -76,7 +79,7 @@ public class LogRecordContext {
     private static void test() {
         HttpResponse execute = HttpUtil
                 .createGet(host + url3)
-                .header("token", "c4df69bc21a446ea943b33d2170b3c13")
+                .header("token", "0ac8c5215bb84e34815233a8c16d7ad3")
                 .header("Cookie", "COOKIE_JSESSIONID_187_1=1634831982590-C140EF9D8B724758C600B9").execute();
         String body = execute.body();
         JSONObject parse = JSONUtil.parseObj(body);
@@ -86,7 +89,7 @@ public class LogRecordContext {
     private static String sms() {
         HttpResponse execute = HttpUtil
                 .createGet(host + smsUrl)
-                .header("token", "c4df69bc21a446ea943b33d2170b3c13")
+                .header("token", "0ac8c5215bb84e34815233a8c16d7ad3")
                 .header("Cookie", "COOKIE_JSESSIONID_187_1=1634831982590-C140EF9D8B724758C600B9").execute();
         String body = execute.body();
         JSONObject parse = JSONUtil.parseObj(body);
@@ -95,7 +98,7 @@ public class LogRecordContext {
         if (parse.getInt("code") == 200) {
             HttpResponse execute1 = HttpUtil
                     .createGet(host + smsUrl1)
-                    .header("token", "c4df69bc21a446ea943b33d2170b3c13")
+                    .header("token", "0ac8c5215bb84e34815233a8c16d7ad3")
                     .header("Cookie", "COOKIE_JSESSIONID_187_1=1634831982590-C140EF9D8B724758C600B9").execute();
             String body1 = execute1.body();
             log.info(body1);
@@ -109,7 +112,7 @@ public class LogRecordContext {
     private static boolean nucleiAcidForm() {
         HttpResponse execute = HttpUtil.createPost(host + url4)
                 .body(param1)
-                .header("token", "c4df69bc21a446ea943b33d2170b3c13")
+                .header("token", "0ac8c5215bb84e34815233a8c16d7ad3")
                 .header("Cookie", "COOKIE_JSESSIONID_187_1=1634831982590-C140EF9D8B724758C600B9").execute();
         String body = execute.body();
         log.info(body);
