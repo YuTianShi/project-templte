@@ -16,7 +16,7 @@ import javax.annotation.Resource;
 @RequestMapping("kafka")
 public class KafkaController {
 
-    private final static String TOPIC_NAME = "test";
+    private final static String TOPIC_NAME = "my-replicated-topic";
 
     @Resource
     private KafkaTemplate<String, String> kafkaTemplate;
