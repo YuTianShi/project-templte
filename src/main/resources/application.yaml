@@ -21,8 +21,8 @@ spring:
       maximum-pool-size: 5
       minimum-idle: 5
   kafka:
-      bootstrap-servers: 42.192.1.184:9092
       producer: # 生产者
+        bootstrap-servers: 42.192.1.184:9092,42.192.1.184:9093,42.192.1.184:9094
         retries: 3 # 设置大于0的值，则客户端会将发送失败的记录重新发送
         batch-size: 16384
         buffer-memory: 33554432
@@ -31,6 +31,7 @@ spring:
         key-serializer: org.apache.kafka.common.serialization.StringSerializer
         value-serializer: org.apache.kafka.common.serialization.StringSerializer
       consumer:
+        bootstrap-servers: 42.192.1.184:9092,42.192.1.184:9093,42.192.1.184:9094
         group-id: default-group
         enable-auto-commit: false
         auto-offset-reset: earliest
