@@ -14,22 +14,59 @@ spring:
   profiles:
     active: dev
   datasource:
-    url: jdbc:mysql://42.192.1.184:3306/test?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://42.192.1.184:3306/test?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
     username: root
     password: mysql
     hikari:
       maximum-pool-size: 5
       minimum-idle: 5
+  cloud:
+    stream:
+      kafka:
+        binder:
+          brokers:
+            - 42.192.1.184
+          brokers-batch:
+              - 42.192.1.184:9092
+              - 42.192.1.184:9093
+              - 42.192.1.184:9094
+          zkNodes:
+            - 42.192.1.184
+          defaultZkPort: 2181
+          defaultBrokerPort: 9092
+          autoAddPartitions: true
+      bindings:
+        myReplicatedTopic:
+          content-type: application/json
+          partitionKeyExpression: payload
+          partitionCount: 0
+          destination: webSocketPushMessageDestination
+          consumer:
+            autoCommitOffset: false
+            partitioned: true
+            max-attempts: 3
+            header-mode: raw
+          group: styGroup
+
+
+logging:
+  level:
+    root: info
+    com.tourage: debug
+
+---
+spring:
+  profiles: production
   kafka:
-      producer: # 生产者
-        bootstrap-servers: 42.192.1.184:9092,42.192.1.184:9093,42.192.1.184:9094
-        retries: 3 # 设置大于0的值，则客户端会将发送失败的记录重新发送
-        batch-size: 16384
-        buffer-memory: 33554432
-        acks: 1
-        # 指定消息key和消息体的编解码方式
-        key-serializer: org.apache.kafka.common.serialization.StringSerializer
-        value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    producer: # 生产者
+      bootstrap-servers: 42.192.1.184:9092,42.192.1.184:9093,42.192.1.184:9094
+      retries: 3 # 设置大于0的值，则客户端会将发送失败的记录重新发送
+      batch-size: 16384
+      buffer-memory: 33554432
+      acks: 1
+      # 指定消息key和消息体的编解码方式
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
       consumer:
         bootstrap-servers: 42.192.1.184:9092,42.192.1.184:9093,42.192.1.184:9094
         group-id: default-group
@@ -54,15 +91,6 @@ spring:
         # MANUAL_IMMEDIATE
         ack-mode: manual_immediate
         missing-topics-fatal: false
-
-logging:
-  level:
-    root: info
-    com.tourage: debug
-
----
-spring:
-  profiles: production
   datasource:
     url: jdbc:mysql://42.192.1.184:3306/test?zeroDateTimeBehavior=convertToNull&useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false&serverTimezone=Asia/Shanghai
     username: root
